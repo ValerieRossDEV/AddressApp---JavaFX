@@ -1,18 +1,47 @@
 package valerie.javafx.javafxproject;
 
 import javafx.application.Application;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
+import valerie.javafx.javafxproject.model.Person;
 
 import java.io.IOException;
 
-public class Main extends Application {
+public class MainApp extends Application {
 
     private Stage primaryStage;
     private BorderPane rootLayout;
+
+    private ObservableList<Person> personData = FXCollections.observableArrayList();
+
+    /**
+     * Constructor
+     */
+    public MainApp() {
+        // Add some sample data
+        personData.add(new Person("Hans", "Muster"));
+        personData.add(new Person("Ruth", "Mueller"));
+        personData.add(new Person("Heinz", "Kurz"));
+        personData.add(new Person("Cornelia", "Meier"));
+        personData.add(new Person("Werner", "Meyer"));
+        personData.add(new Person("Lydia", "Kunz"));
+        personData.add(new Person("Anna", "Best"));
+        personData.add(new Person("Stefan", "Meier"));
+        personData.add(new Person("Martin", "Mueller"));
+    }
+
+    /**
+     * Returns the data as an observable list of Persons.
+     * @return
+     */
+    public ObservableList<Person> getPersonData() {
+        return personData;
+    }
 
     public void start(Stage primaryStage) {
         //1) Declare a primary stage (Everything will be on this stage)
@@ -21,15 +50,15 @@ public class Main extends Application {
         this.primaryStage.setTitle("Sample JavaFX App");
         //2) Initialize RootLayout
         initRootLayout();
-        //3) Display the EmployeeOperations View
-        showEmployeeOperationsView();
+        //3) Display the PersonOperations View
+        showPersonOperationsView();
     }
     //Initializes the root layout.
     public void initRootLayout() {
         try {
             //First, load root layout from RootLayout.fxml
             FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(Main.class.getResource("RootLayout.fxml"));
+            loader.setLocation(MainApp.class.getResource("RootLayout.fxml"));
             rootLayout = (BorderPane) loader.load();
             //Second, show the scene containing the root layout.
             Scene scene = new Scene(rootLayout); //We are sending rootLayout to the Scene.
@@ -40,14 +69,14 @@ public class Main extends Application {
             e.printStackTrace();
         }
     }
-    //Shows the employee operations view inside the root layout.
-    public void showEmployeeOperationsView() {
+    //Shows the person operations controller inside the root layout.
+    public void showPersonOperationsView() {
         try {
-            //First, load EmployeeOperationsView from EmployeeOperations.fxml
+            //First, load PersonOperationsView from PersonOperations.fxml
             FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(Main.class.getResource("EmployeeOperations.fxml"));
+            loader.setLocation(MainApp.class.getResource("PersonOperations.fxml"));
             AnchorPane employeeOperationsView = (AnchorPane) loader.load();
-            // Set Employee Operations view into the center of root layout.
+            // Set Person Operations controller into the center of root layout.
             rootLayout.setCenter(employeeOperationsView);
         } catch (IOException e) {
             e.printStackTrace();
@@ -55,7 +84,10 @@ public class Main extends Application {
     }
 
 
+
+
     public static void main(String[] args) {
         launch();
+
     }
 }

@@ -48,8 +48,9 @@ public class MainApp extends Application {
         //1) Declare a primary stage (Everything will be on this stage)
         this.primaryStage = primaryStage;
         //Optional: Set a title for primary stage
-        this.primaryStage.setTitle("Sample JavaFX App");
+        this.primaryStage.setTitle("Address App - JavaFX");
         //2) Initialize RootLayout
+
         initRootLayout();
         //3) Display the PersonOperations View
         showPersonOperationsView();
